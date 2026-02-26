@@ -2,7 +2,13 @@
 //  09 — IMAGE SAMPLER
 // ============================================================
 
-paper.setup(document.getElementById('canvas'));
+// defer Paper.js setup until DOM is fully laid out
+window.addEventListener('load', function() {
+  var canvas = document.getElementById('canvas');
+  paper.setup(canvas);
+  resizeAndRedraw();
+});
+// paper.setup called on load — do not call again below
 
 // -------------------- UI: Upload --------------------
 document.getElementById('upload').onclick = function () {
@@ -282,7 +288,7 @@ function resizeAndRedraw() {
 }
 
 window.addEventListener('resize', resizeAndRedraw);
-resizeAndRedraw();
+// initial call handled in window load above
 
 // ============================================================
 //  MAIN DRAW
